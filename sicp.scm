@@ -33,3 +33,16 @@
       (fib-iter b (+ a b) (- count 1))))
 (define (fibi n)
   (fib-iter 0 1 n))
+
+(define (fib3 n)
+  (cond ((< n 3) n)
+	(else (+ (fib3 (- n 1))
+		 (fib3 (- n 2))
+		 (fib3 (- n 3))))))
+
+(define (fib3-iter a b c count)
+  (if (= count 0)
+      a
+      (fib3-iter b c (+ a b c) (- count 1))))
+(define (fib3i n)
+  (fib3-iter 0 1 2 n))
