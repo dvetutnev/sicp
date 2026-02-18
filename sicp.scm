@@ -46,3 +46,26 @@
       (fib3-iter b c (+ a b c) (- count 1))))
 (define (fib3i n)
   (fib3-iter 0 1 2 n))
+
+(define (expt b n)
+  (if (= n 0)
+      1
+      (* b (expt b (- n 1)))))
+
+(define (expt-iter b counter product)
+  (if (= counter 0)
+      product
+      (expt-iter b
+		 (- counter 1)
+		 (* product b))))
+(define (expti b n)
+  (expt-iter b n 1))
+
+(define (square n)
+  (* n n))
+(define (even? n)
+  (= (remainder n 2) 0))
+(define (fast-expt b n)
+  (cond ((= n 0) 1)
+	((even? n) (square (fast-expt b (/ n 2))))
+	(else (* b (fast-expt b (- n 1))))))
