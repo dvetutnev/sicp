@@ -4,6 +4,7 @@
       0
       y))
 
+
 (define (square x)
   (* x x))
 (define (average x y)
@@ -46,6 +47,7 @@
       (fib3-iter b c (+ a b c) (- count 1))))
 (define (fib3i n)
   (fib3-iter 0 1 2 n))
+
 
 (define (expt b n)
   (if (= n 0)
