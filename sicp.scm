@@ -98,3 +98,11 @@
 	 (fast-mult (double a) (halve b)))
 	(else
 	 (+ a (fast-mult a (- b 1))))))
+
+(define (fast-mult-iter a b c)
+  (cond ((= b 0)
+	 c)
+	((even? b)
+	 (fast-mult-iter (double a) (halve b) c))
+	(else
+	 (fast-mult-iter a (- b 1) (+ c a)))))
