@@ -106,3 +106,8 @@
 	 (fast-mult-iter (double a) (halve b) c))
 	(else
 	 (fast-mult-iter a (- b 1) (+ c a)))))
+
+(define (gcd a b)
+  (if (= b 0)
+      a
+      (gcd b (remainder a b))))
