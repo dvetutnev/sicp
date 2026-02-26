@@ -165,3 +165,14 @@
 	(else
 	 (remainder (* base (expmod base (- exp 1) m))
 		    m))))
+
+
+(define (sum term a next b)
+  (if (> a b)
+      0
+      (+ (term a)
+	 (sum term (next a) next b))))
+
+(define (inc x) (+ x 1))
+(define (cube x) (* x x x))
+(define (cube-sum a b) (sum cube a inc b))
