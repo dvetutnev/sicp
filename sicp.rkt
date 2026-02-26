@@ -173,6 +173,15 @@
       (+ (term a)
 	 (sum term (next a) next b))))
 
+(define (sumi term a next b)
+  (define (iter x result)
+    (if (> x b)
+	result
+	(iter (next x) (+ result (term x)))))
+  (iter a 0))
+
+(define (identity x) x)
+
 (define (inc x) (+ x 1))
 (define (cube x) (* x x x))
 (define (cube-sum a b) (sum cube a inc b))
