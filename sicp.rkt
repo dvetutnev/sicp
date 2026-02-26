@@ -176,3 +176,8 @@
 (define (inc x) (+ x 1))
 (define (cube x) (* x x x))
 (define (cube-sum a b) (sum cube a inc b))
+
+(define (integral f a b dx)
+  (define (add-dx x) (+ x dx))
+  (* (sum f (+ a (/ dx 2)) add-dx b)
+     dx))
