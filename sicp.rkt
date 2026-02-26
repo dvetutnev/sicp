@@ -219,3 +219,8 @@
 	(iter (next x) (combiner result (term x)))))
   (iter a init-val))
 
+(define (suma term a next b)
+  (accumulate + 0 term a next b))
+
+(define (producta term a next b)
+  (accumulate * 1 term a next b))
