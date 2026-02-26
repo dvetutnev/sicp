@@ -187,6 +187,7 @@
 	(iter (next x) (* result (term x)))))
   (iter a 1))
 
+
 (define (identity x) x)
 
 (define (factorial n)
@@ -209,3 +210,12 @@
 	(* 4 (sum f (+ a h) add-2h b))
 	(f b))
      (/ h 3)))
+
+
+(define (accumulate combiner init-val term a next b)
+  (define (iter x result)
+    (if (> x b)
+	result
+	(iter (next x) (combiner result (term x)))))
+  (iter a init-val))
+
