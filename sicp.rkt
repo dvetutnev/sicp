@@ -224,3 +224,8 @@
 
 (define (producta term a next b)
   (accumulate * 1 term a next b))
+
+(define x 5)
+(+ (let ((x 3))
+     (+ x (* x 10)))
+   x)
