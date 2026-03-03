@@ -246,3 +246,10 @@
 (define (golden-ratio)
   (fixed-point (lambda (x) (+ 1 (/ 1 x)))
 	       1.0))
+
+(define (exptf guess)
+  (fixed-point (lambda (x) (/ (log 1000) (log x)))
+	       guess))
+(define (exptfa guess)
+  (fixed-point (lambda (x) (average (/ (log 1000) (log x)) x))
+	       guess))
