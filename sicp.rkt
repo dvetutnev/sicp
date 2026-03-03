@@ -253,3 +253,9 @@
 (define (exptfa guess)
   (fixed-point (lambda (x) (average (/ (log 1000) (log x)) x))
 	       guess))
+
+(define (cont-frac n d k)
+  (if (= k 0)
+      (/ (n k) (d k))
+      (/ (n k) (+ (d k)
+		  (cont-frac n d (- k 1))))))
