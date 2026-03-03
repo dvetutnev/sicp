@@ -236,3 +236,7 @@
 	  next
 	  (try next))))
   (try first-guess))
+
+(define (sqrtf x)
+  (fixed-point (lambda (y) (average y (/ x y)))
+	       1.0))
