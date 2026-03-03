@@ -254,8 +254,8 @@
   (fixed-point (lambda (x) (average (/ (log 1000) (log x)) x))
 	       guess))
 
-(define (cont-frac n d k)
+(define (cont-frac N D k)
   (if (= k 0)
-      (/ (n k) (d k))
-      (/ (n k) (+ (d k)
-		  (cont-frac n d (- k 1))))))
+      (/ (N k) (D k))
+      (/ (N k) (+ (D k)
+		  (cont-frac N D (- k 1))))))
