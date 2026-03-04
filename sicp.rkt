@@ -259,3 +259,10 @@
       (/ (N k) (D k))
       (/ (N k) (+ (D k)
 		  (cont-frac N D (- k 1))))))
+
+(define (cont-fraci N D k)
+  (define (iter i result)
+    (if (= i 0)
+	result
+	(iter (sub1 i) (/ (N i) (+ result (D i))))))
+  (iter k (/ (N k) (D k))))
