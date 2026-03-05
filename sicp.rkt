@@ -282,3 +282,10 @@
 	(newline)
 	(rec (add1 i))))
   (rec 1))
+
+(define (tan-cf x k)
+  (cont-frac-iter (lambda (i) (if (= i 1)
+				  x
+				  (* x x -1)))
+		  (lambda (i) (- (* 2.0 i ) 1))
+		  k))
