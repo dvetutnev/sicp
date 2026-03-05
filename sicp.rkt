@@ -289,3 +289,6 @@
 				  (* x x -1)))
 		  (lambda (i) (- (* 2.0 i ) 1))
 		  k))
+
+(define (average-damp f)
+  (lambda (x) (average x (f x))))
