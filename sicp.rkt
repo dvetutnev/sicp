@@ -254,15 +254,31 @@
   (fixed-point (lambda (x) (average (/ (log 1000) (log x)) x))
 	       guess))
 
-(define (cont-frac N D k)
-  (if (= k 0)
-      (/ (N k) (D k))
-      (/ (N k) (+ (D k)
-		  (cont-frac N D (- k 1))))))
 
-(define (cont-fraci N D k)
+(define (cont-frac-recur N D k)
+  (define (recur i)
+    (if (= k i)
+	(/ (N i) (D i))
+	(/ (N i) (+ (D i) (recur (add1 i))))))
+  (recur 1))
+
+(define (cont-frac-iter N D k)
   (define (iter i result)
     (if (= i 0)
 	result
 	(iter (sub1 i) (/ (N i) (+ result (D i))))))
   (iter k (/ (N k) (D k))))
+
+
+(define (d-eurl i)
+  (if (= (modulo i 3) 2)
+      (* 2 (/ (add1 i) 3))
+      1))
+
+(define (display-serie f n)
+  (define (rec i)
+    (display (f i)) (display ", ")
+    (if (= i n)
+	(newline)
+	(rec (add1 i))))
+  (rec 1))
