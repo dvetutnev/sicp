@@ -292,3 +292,7 @@
 
 (define (average-damp f)
   (lambda (x) (average x (f x))))
+
+(define (sqrt-fad x)
+  (fixed-point (average-damp (lambda (y) (/ x y)))
+	       1.0))
