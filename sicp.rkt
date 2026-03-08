@@ -296,3 +296,10 @@
 (define (sqrt-fad x)
   (fixed-point (average-damp (lambda (y) (/ x y)))
 	       1.0))
+
+(define (cube x) (* x x x))
+
+(define dx 0.00001)
+(define (deriv g)
+  (lambda (x) (/ (- (g (+ x dx)) (g x))
+		 dx)))
