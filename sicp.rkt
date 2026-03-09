@@ -239,7 +239,7 @@
 	  (try next))))
   (try first-guess))
 
-(define (sqrtf x)
+(define (sqrt-f x)
   (fixed-point (lambda (y) (average y (/ x y)))
 	       1.0))
 
@@ -303,3 +303,13 @@
 (define (deriv g)
   (lambda (x) (/ (- (g (+ x dx)) (g x))
 		 dx)))
+
+(define (newton-transform g)
+  (lambda (x) (- x (/ (g x) ((deriv g) x)))))
+
+(define (newton-method g guess)
+  (fixed-point (newton-transform g) guess))
+
+(define (sqrt-n x)
+  (newton-method (lambda (y) (- (square y) x))
+		 1.0))
