@@ -326,3 +326,9 @@
   (fixed-point-of-transform (lambda (y) (- (square y) x))
 			    newton-transform
 			    1.0))
+
+(define (cubic a b c)
+  (lambda (x) (+ (cube x)
+		 (* (square x) a)
+		 (* x b)
+		 c)))
