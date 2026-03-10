@@ -332,3 +332,6 @@
 		 (* (square x) a)
 		 (* x b)
 		 c)))
+
+(define (double f)
+  (lambda (x) (f (f x))))
