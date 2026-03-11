@@ -364,3 +364,10 @@
 	product
 	(iter x (- n 1) (* product x))))
   (iter x n 1))
+
+(define (nth-root-damped x nth damp)
+  (fixed-point
+   ((repeated average-damp damp)
+    (lambda (y)
+      (/ x (power y (- nth 1)))))
+   1.0))
