@@ -352,3 +352,15 @@
 
 (define (smooth-nth f n)
   ((repeated smooth n) f))
+
+(define (power x n)
+  (if (= n 1)
+      x
+      (* x (power x (- n 1)))))
+
+(define (poweri x n)
+  (define (iter x n product)
+    (if (= n 0)
+	product
+	(iter x (- n 1) (* product x))))
+  (iter x n 1))
