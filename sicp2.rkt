@@ -22,3 +22,21 @@
 		  +
 		  -)))
     (cons (sign (abs (/ n g))) (abs (/ d g)))))
+
+
+(define (cons5 a b)
+  (* (expt 2 a) (expt 3 b)))
+
+(define (car5 x)
+  (define (car-iter x count)
+    (if (= 0 (remainder x 2))
+	(car-iter (/ x 2) (+ 1 count))
+	count))
+  (car-iter x 0))
+
+(define (cdr5 x)
+  (define (cdr-iter x count)
+    (if (= 0 (remainder x 3))
+	(cdr-iter (/ x 3) (+ 1 count))
+	count))
+  (cdr-iter x 0))
