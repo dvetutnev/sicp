@@ -40,3 +40,18 @@
 	(cdr-iter (/ x 3) (+ 1 count))
 	count))
   (cdr-iter x 0))
+
+
+(define (appendc list1 list2)
+  (if (null? list1)
+      list2
+      (cons (car list1) (append (cdr list1) list2))))
+
+
+(define (last-pair lst)
+	 (if (null? (cdr lst))
+	     lst
+	     (last-pair (cdr lst))))
+
+					;
+
