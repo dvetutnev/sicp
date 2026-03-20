@@ -87,3 +87,15 @@
     (if (null? y)
 	(list x)
 	(same-parityi y))))
+
+(define (same-parity-iter x . y)
+  (let ((parity (if (odd? x) odd? even?)))
+    (define (iter lst acc)
+      (if (null? lst)
+	  acc
+	  (if (parity (car lst))
+	      (iter (cdr lst) (append acc (list (car lst))))
+	      (iter (cdr lst) acc))))
+    (if (null? y)
+	(list x)
+	(iter y (list)))))
