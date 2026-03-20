@@ -45,12 +45,14 @@
 (define (appendc list1 list2)
   (if (null? list1)
       list2
-      (cons (car list1) (append (cdr list1) list2))))
-
+      (cons (car list1) (appendc (cdr list1) list2))))
 
 (define (last-pair lst)
 	 (if (null? (cdr lst))
 	     lst
 	     (last-pair (cdr lst))))
 
-
+(define (reversec lst)
+  (if (null? lst)
+      lst
+      (append (reversec (cdr lst)) (list (car lst)))))
