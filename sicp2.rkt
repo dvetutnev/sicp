@@ -73,3 +73,17 @@
 
 (define us-coins (list 50 25 10 5 1))
 (define uk-coins (list 100 50 20 10 5 2 1 0.5))
+
+(define (same-parity x . y)
+  (let ((parity (if (odd? x)
+		    odd?
+		    even?)))
+    (define (same-parityi lst)
+      (if (null? lst)
+	  '()
+	  (if (parity (car lst))
+	      (cons (car lst) (same-parityi (cdr lst)))
+	      (same-parityi (cdr lst)))))
+    (if (null? y)
+	(list x)
+	(same-parityi y))))
