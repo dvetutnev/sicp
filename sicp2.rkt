@@ -99,3 +99,18 @@
     (if (null? y)
 	(list x)
 	(iter y (list)))))
+
+(define (mapc proc lst)
+  (if (null? lst)
+      (list)
+      (cons (proc (car lst))
+	    (mapc proc (cdr lst)))))
+
+(define (map-iter proc lst)
+  (define (iter lst acc)
+    (if (null? lst)
+	acc
+	(iter (cdr lst)
+	      (append acc (list (proc (car lst)))))))
+  (iter lst (list)))
+
