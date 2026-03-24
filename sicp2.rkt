@@ -129,3 +129,9 @@
 	((not (pair? x)) 1)
 	(else (+ (count-leaves (car x))
 		 (count-leaves (cdr x))))))
+
+(define (fringe tree)
+  (cond ((null? tree) null)
+	((not (pair? tree)) (list tree))
+	(else (append (fringe (car tree))
+		      (fringe (cdr tree))))))
