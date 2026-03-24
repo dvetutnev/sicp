@@ -55,17 +55,26 @@
 (define (reversec lst)
   (if (null? lst)
       lst
-      (append (reversec (cdr lst)) (list (car lst)))))
+      (append (reversec (cdr lst))
+	      (list (car lst)))))
+
+(define (deep-reverse lst)
+  (cond ((null? lst) lst)
+	((pair? (car lst))
+	 (append (deep-reverse (cdr lst))
+		 (list (deep-reverse (car lst)))))
+	(else
+	 (append (deep-reverse (cdr lst))
+		 (list (car lst))))))
 
 (define (cc amount coin-values)
   (cond ((= amount 0) 1)
         ((or (< amount 0) (no-more? coin-values)) 0)
         (else
-          (+ (cc amount
-                 (except-first-denomination coin-values))
-              (cc (- amount
-                     (first-denomination coin-values))
-                  coin-values)))))
+	 (+ (cc amount
+		(except-first-denomination coin-values))
+	    (cc (- amount
+		   (first-denomination coin-values)) coin-values)))))
 
 (define (no-more? coins) (null? coins))
 (define (except-first-denomination coins) (cdr coins))
