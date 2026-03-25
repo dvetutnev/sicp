@@ -135,3 +135,31 @@
 	((not (pair? tree)) (list tree))
 	(else (append (fringe (car tree))
 		      (fringe (cdr tree))))))
+
+
+(define (make-mobile left right)
+  (list left right))
+(define (make-branch length structure)
+  (list length structure))
+
+(define (total-weight m)
+  (if (not (pair? m))
+      m
+      (let ((bsl (branch-structure (left-branch m)))
+            (bsr (branch-structure (right-branch m))))
+        (cond ((and (not (pair? bsl)) (not (pair? bsr))) (+ bsl bsr))
+              ((not (pair? bsl)) (+ bsl (total-weight bsr)))
+              ((not (pair? bsr)) (+ bsr (total-weight bsl)))
+              (else (+ (total-weight bsl) (total-weight bsr)))))))
+
+(define (left-branch m) (car m))
+(define (right-branch m) (car (cdr m)))
+(define (branch-left m) (car m))
+(define (branch-structure m) (car (cdr m)))
+
+(define m_unbalanced (make-mobile (make-branch 1 2)
+                                  (make-branch 1 (make-mobile (make-branch 0.5 3)
+                                                              (make-branch 2 4)))))
+(define m_balanced (make-mobile (make-branch 1 2)
+                                (make-branch 1 (make-mobile (make-branch 1 1)
+                                                            (make-branch 1 1)))))
