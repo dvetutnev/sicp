@@ -154,6 +154,8 @@
 
 (define (torque b)
   (* (branch-length b) (total-weight (branch-structure b))))
+(define (torques-equal? b1 b2)
+  (equal? (torque b1) (torque b2)))
 
 (define (left-branch m) (car m))
 (define (right-branch m) (car (cdr m)))
