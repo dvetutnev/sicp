@@ -152,9 +152,12 @@
               ((not (pair? bsr)) (+ bsr (total-weight bsl)))
               (else (+ (total-weight bsl) (total-weight bsr)))))))
 
+(define (torque b)
+  (* (branch-length b) (total-weight (branch-structure b))))
+
 (define (left-branch m) (car m))
 (define (right-branch m) (car (cdr m)))
-(define (branch-left m) (car m))
+(define (branch-length m) (car m))
 (define (branch-structure m) (car (cdr m)))
 
 (define m_unbalanced (make-mobile (make-branch 1 2)
