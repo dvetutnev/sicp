@@ -157,6 +157,13 @@
 (define (torques-equal? b1 b2)
   (equal? (torque b1) (torque b2)))
 
+(define (balanced? m)
+  (if (or (null? m) (not (pair? m)))
+      #t
+      (and (torques-equal? (left-branch m) (right-branch m))
+	   (balanced? (branch-structure (left-branch m)))
+	   (balanced? (branch-structure (right-branch m))))))
+
 (define (left-branch m) (car m))
 (define (right-branch m) (car (cdr m)))
 (define (branch-length m) (car m))
