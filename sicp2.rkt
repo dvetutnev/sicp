@@ -175,3 +175,11 @@
 (define m_balanced (make-mobile (make-branch 1 2)
                                 (make-branch 1 (make-mobile (make-branch 1 1)
                                                             (make-branch 1 1)))))
+
+
+(define (scale-tree tree factor)
+  (map (lambda (sub-tree)
+	 (if (pair? sub-tree)
+	     (scale-tree sub-tree factor)
+	     (* sub-tree factor)))
+       tree))
