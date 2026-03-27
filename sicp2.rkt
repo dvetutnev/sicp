@@ -188,3 +188,16 @@
 	     (scale-tree sub-tree factor)
 	     (* sub-tree factor)))
        tree))
+
+(define (square-treec tree)
+  (cond ((null? tree) null)
+	((not (pair? tree)) (* tree tree))
+	(else (cons (square-treec (car tree))
+		    (square-treec (cdr tree))))))
+
+(define (square-tree tree)
+  (map (lambda (sub-tree)
+	 (if (pair? sub-tree)
+	     (square-tree sub-tree)
+	     (* sub-tree sub-tree)))
+       tree))
