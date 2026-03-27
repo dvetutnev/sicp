@@ -176,6 +176,11 @@
                                 (make-branch 1 (make-mobile (make-branch 1 1)
                                                             (make-branch 1 1)))))
 
+(define (scale-treec tree factor)
+  (cond ((null? tree) null)
+	((not (pair? tree)) (* tree factor))
+	(else (cons (scale-treec (car tree) factor)
+		    (scale-treec (cdr tree) factor)))))
 
 (define (scale-tree tree factor)
   (map (lambda (sub-tree)
