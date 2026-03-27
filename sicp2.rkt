@@ -217,7 +217,7 @@
 
 (define (subset s)
   (if (null? s)
-      (list null)
+      (list '())
       (let ((rest (subset (cdr s))))
 	(display s) (display 43) (display rest) (newline)
 	(append rest (map (lambda (x) (cons (car s) x))
