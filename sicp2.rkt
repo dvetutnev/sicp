@@ -201,3 +201,16 @@
 	     (square-tree sub-tree)
 	     (* sub-tree sub-tree)))
        tree))
+
+(define (tree-map proc tree)
+  (map (lambda (sub-tree)
+	 (if (pair? sub-tree)
+	     (tree-map proc sub-tree)
+	     (proc sub-tree)))
+       tree))
+
+(define (square x)
+  (* x x))
+
+(define (square-treel tree)
+  (tree-map square tree))
