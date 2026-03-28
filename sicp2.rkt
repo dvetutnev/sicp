@@ -219,6 +219,15 @@
   (if (null? s)
       (list '())
       (let ((rest (subset (cdr s))))
-	(display s) (display 43) (display rest) (newline)
-	(append rest (map (lambda (x) (cons (car s) x))
+	(display "subset, s=") (display s)
+	(display ", rest=") (display rest)
+	(newline)
+	(append rest (map (lambda (x)
+			    (display "lambda, x=") (display x)
+			    (display " (car s)=") (display (car s))
+			    (newline)
+			    (cons (car s) x))
 			  rest)))))
+
+
+
