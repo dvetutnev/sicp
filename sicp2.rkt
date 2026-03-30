@@ -230,4 +230,9 @@
 			  rest)))))
 
 
-
+(define (filterc pred sequence)
+  (cond ((null? sequence) null)
+	((pred (car sequence))
+	 (cons (car sequence)
+	       (filterc pred (cdr sequence))))
+	(else (filterc pred (cdr sequence)))))
