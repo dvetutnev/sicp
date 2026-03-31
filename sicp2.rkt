@@ -236,3 +236,9 @@
 	 (cons (car sequence)
 	       (filterc pred (cdr sequence))))
 	(else (filterc pred (cdr sequence)))))
+
+(define (accumulate op initial sequence)
+  (if (null? sequence)
+      initial
+      (op (car sequence)
+	  (accumulate op initial (cdr sequence)))))
