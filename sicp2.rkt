@@ -242,3 +242,8 @@
       initial
       (op (car sequence)
 	  (accumulate op initial (cdr sequence)))))
+
+(define (lengthc sequence)
+  (accumulate (lambda (x y) (+ y 1))
+	      0
+	      sequence))
