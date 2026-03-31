@@ -247,3 +247,6 @@
   (accumulate (lambda (x y) (+ y 1))
 	      0
 	      sequence))
+
+(define (appendc seq1 seq2)
+  (accumulate cons seq2 seq1))
