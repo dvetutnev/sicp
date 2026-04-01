@@ -258,6 +258,7 @@
 
 (define (horner-eval x sequence)
   (accumulate (lambda (this-coeff hight-terms)
+		(display this-coeff) (display " ") (display hight-terms) (newline)
 		(+ (* x hight-terms) this-coeff))
 	      0
 	      sequence))
