@@ -262,3 +262,7 @@
 		(+ (* x hight-terms) this-coeff))
 	      0
 	      sequence))
+
+(define (reverse sequence)
+  (cons (reverse (cdr sequence))
+	(car sequence)))
