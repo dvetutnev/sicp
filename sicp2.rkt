@@ -255,3 +255,9 @@
   (accumulate (lambda (x y) (cons (p x) y))
 	      '()
 	      sequence))
+
+(define (horner-eval x sequence)
+  (accumulate (lambda (this-coeff hight-terms)
+		(+ (* x hight-terms) this-coeff))
+	      0
+	      sequence))
