@@ -269,6 +269,6 @@
 	(else (append (enumerate-tree (cdr t))
 		      (enumerate-tree (car t))))))
 
-(define (count-leaves t)
+(define (count-leavesa t)
   (accumulate + 0 (map (lambda (x) 1)
 		       (enumerate-tree t))))
