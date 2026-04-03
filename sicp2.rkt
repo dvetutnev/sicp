@@ -272,3 +272,12 @@
 (define (count-leavesa t)
   (accumulate + 0 (map (lambda (x) 1)
 		       (enumerate-tree t))))
+
+
+(define (accumulate-n proc init seq)
+  (if (null? (car seq))
+      null
+      (cons (accumulate proc init (map car seq))
+	    (accumulate-n proc init (map cdr seq)))))
+
+
