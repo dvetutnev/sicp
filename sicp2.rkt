@@ -263,3 +263,8 @@
 	      0
 	      sequence))
 
+(define (enumerate-tree t)
+  (cond ((null? t) null)
+	((not (pair? t)) (list t))
+	(else (append (enumerate-tree (cdr t))
+		      (enumerate-tree (car t))))))
