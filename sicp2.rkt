@@ -238,7 +238,6 @@
 	(else (filterc pred (cdr sequence)))))
 
 (define (accumulate op initial sequence)
-  (display sequence)
   (if (null? sequence)
       initial
       (op (car sequence)
@@ -285,6 +284,8 @@
 (define (dot-product v w)
   (accumulate + 0 (map * v w)))
 
+(define (matrix-*-vector m v)
+  (map (lambda (row) (dot-product row v)) m))
 
 (define (fold-left op initial sequence)
   (define (iter result rest)
