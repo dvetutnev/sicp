@@ -238,6 +238,7 @@
 	(else (filterc pred (cdr sequence)))))
 
 (define (accumulate op initial sequence)
+  (display sequence)
   (if (null? sequence)
       initial
       (op (car sequence)
@@ -287,10 +288,10 @@
 
 (define (fold-left op initial sequence)
   (define (iter result rest)
+    (display result) (display " ") (display rest) (newline)
     (if (null? rest)
 	result
 	(iter (op result (car rest))
 	      (cdr rest))))
   (iter initial sequence))
-
 (define fold-right accumulate)
