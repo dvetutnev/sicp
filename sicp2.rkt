@@ -287,6 +287,9 @@
 (define (matrix-*-vector m v)
   (map (lambda (row) (dot-product row v)) m))
 
+(define (transpone m)
+  (accumulate-n cons null m))
+
 (define (fold-left op initial sequence)
   (define (iter result rest)
     (display result) (display " ") (display rest) (newline)
