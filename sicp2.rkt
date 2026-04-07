@@ -296,10 +296,12 @@
 
 (define (fold-left op initial sequence)
   (define (iter result rest)
-    (display result) (display " ") (display rest) (newline)
     (if (null? rest)
 	result
 	(iter (op result (car rest))
 	      (cdr rest))))
   (iter initial sequence))
 (define fold-right accumulate)
+
+(define (reversel sequence)
+  (fold-left (lambda (x y) (cons y x)) null sequence))
