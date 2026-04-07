@@ -290,6 +290,10 @@
 (define (transpone m)
   (accumulate-n cons null m))
 
+(define (matrix-*-matrix m n)
+  (let ((cols (transpone n)))
+    (map (lambda (row) (matrix-*-vector cols row)) m)))
+
 (define (fold-left op initial sequence)
   (define (iter result rest)
     (display result) (display " ") (display rest) (newline)
