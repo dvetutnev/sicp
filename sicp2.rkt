@@ -366,3 +366,12 @@
   (map make-pair-sum
        (filter prime-sum?
 	       (unique-pairs n))))
+
+(define (ordered-tripls n)
+  (flatmap (lambda (i)
+	     (flatmap (lambda (j)
+			(map (lambda (k)
+			       (list i j k))
+			     (enumerate-interval 1 (- j 1))))
+		      (enumerate-interval 1 (- i 1))))
+	   (enumerate-interval 1 n)))
