@@ -378,3 +378,6 @@
 
 (define (triple-sum? triple s)
   (= s (accumulate + 0 triple)))
+
+(define (make-triple-sum triple)
+  (append triple (list (accumulate + 0 triple))))
