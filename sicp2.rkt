@@ -375,3 +375,6 @@
 			     (enumerate-interval 1 (- j 1))))
 		      (enumerate-interval 1 (- i 1))))
 	   (enumerate-interval 1 n)))
+
+(define (triple-sum? triple s)
+  (= s (accumulate + 0 triple)))
