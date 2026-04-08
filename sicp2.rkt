@@ -367,7 +367,7 @@
        (filter prime-sum?
 	       (unique-pairs n))))
 
-(define (ordered-tripls n)
+(define (ordered-triples n)
   (flatmap (lambda (i)
 	     (flatmap (lambda (j)
 			(map (lambda (k)
@@ -376,8 +376,12 @@
 		      (enumerate-interval 1 (- i 1))))
 	   (enumerate-interval 1 n)))
 
-(define (triple-sum? triple s)
-  (= s (accumulate + 0 triple)))
-
 (define (make-triple-sum triple)
   (append triple (list (accumulate + 0 triple))))
+
+(define (ordered-triple-sum n s)
+  (define (triple-sum? triple)
+    (= s (accumulate + 0 triple)))
+  (map make-triple-sum
+       (filter triple-sum?
+	       (ordered-triples n))))
