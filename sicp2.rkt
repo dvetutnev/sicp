@@ -436,3 +436,11 @@
   (cond ((null? lst) false)
 	((eq? item (car lst)) lst)
 	(else (memqc item (cdr lst)))))
+
+(define (equalc? a b)
+  (cond ((and (pair? a) (pair? b))
+	 (and (equalc? (car a) (car b))
+	      (equalc? (cdr a) (cdr b))))
+	((and (number? a) (number? b))
+	 (= a b))
+	(else (eq? a b))))
