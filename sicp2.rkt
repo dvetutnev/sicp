@@ -430,3 +430,9 @@
          (and (not (attacks? q (car board)))
               (iter q (cdr board)))))
    (iter kth-queen other-queens)))
+
+
+(define (memqc item lst)
+  (cond ((null? lst) false)
+	((eq? item (car lst)) lst)
+	(else (memqc item (cdr lst)))))
