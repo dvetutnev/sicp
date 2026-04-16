@@ -498,7 +498,9 @@
   (cadr s))
 
 (define (augend s)
-  (caddr s))
+  (if (null? (cdddr s))
+      (caddr s)
+      (cons '+ (cddr s))))
 
 (define (product? x)
   (and (pair? x) (eq? (car x) '*)))
@@ -507,7 +509,9 @@
   (cadr p))
 
 (define (multiplicand p)
-  (caddr p))
+  (if (null? (cdddr p))
+      (caddr p)
+      (cons '* (cddr p))))
 
 
 (define  (exponentiation? x)
