@@ -528,3 +528,9 @@
 	((=number? exponent 1) base)
 	((and (number? base) (number? exponent)) (expt base exponent))
 	(else (list '** base exponent))))
+
+
+(define (element-of-set? x set)
+  (cond ((null? set) false)
+	((equal? x (car set)) true)
+	(else (element-of-set? x (cdr set)))))
