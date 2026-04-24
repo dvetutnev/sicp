@@ -103,3 +103,20 @@
 (define evens (list->tree '(0 2 4 6 8 10)))
 (define odds (list->tree '(1 3 5 7 9)))
 (define primes (list->tree '(2 3 5 7 11 13 17 19)))
+
+
+(define (lookup given-key set-of-records)
+  (cond ((null? set-of-records) false)
+        ((equal? given-key (key (car set-of-records)))
+         (car set-of-records))
+        (else (lookup given-key (cdr set-of-records)))))
+
+(define (key record) (car record))
+(define (data record) (cdr record))
+(define (make-record key data) (cons key data))
+
+(define database
+  (list (make-record 1 'Bill)
+        (make-record 2 'Joe)
+        (make-record 3 'Frank)
+        (make-record 4 'John)))
