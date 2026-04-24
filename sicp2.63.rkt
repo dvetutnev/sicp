@@ -120,3 +120,14 @@
         (make-record 2 'Joe)
         (make-record 3 'Frank)
         (make-record 4 'John)))
+
+(define (lookup-tree given-key set-of-records)
+  (cond ((null? set-of-records) false)
+	((= given-key (key (car set-of-records)))
+	 (car set-of-records))
+	((< given-key (key (car set-of-records)))
+	 (lookup-tree given-key (left-branch set-of-records)))
+	((> given-key (key (car set-of-records)))
+	 (lookup-tree given-key (right-branch set-of-records)))))
+
+(define tree-db (list->tree database))
