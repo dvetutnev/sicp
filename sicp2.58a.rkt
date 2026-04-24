@@ -1,4 +1,4 @@
- (define (deriv exp var)
+(define (deriv exp var)
   (cond ((number? exp) 0)
 	((variable? exp)
 	 (if (same-variable? exp var) 1 0))
