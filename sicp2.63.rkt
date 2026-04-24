@@ -35,3 +35,10 @@
 	 (make-tree (entry set)
 		    (left-branch set)
 		    (adjoin-set x (right-branch set))))))
+
+(define (tree->list-1 tree)
+  (if (null? tree)
+      '()
+      (append (tree->list-1 (left-branch tree))
+	      (cons (entry tree)
+		    (tree->list-1 (right-branch tree))))))
