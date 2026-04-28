@@ -89,3 +89,16 @@
 	(adjoin-set (make-leaf (car pair)
 			       (cadr pair))
 		    (make-leaf-set (cdr pairs))))))
+
+
+(define (generate-huffman-tree pairs)
+  (successive-merge (make-leaf-set pairs)))
+
+(define (successive-merge leaf-set)
+  (if (null? (cdr leaf-set))
+      (car leaf-set)
+      (successive-merge
+        (adjoin-set
+          (make-code-tree (cadr leaf-set)
+                          (car leaf-set))
+          (cddr leaf-set)))))
