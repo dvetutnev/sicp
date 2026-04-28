@@ -53,3 +53,23 @@
 				   (make-leaf 'C 1)))))
 
 (define sample-message '(0 1 1 0 0 1 0 1 0 1 1 1 0))
+
+
+(define (element-of-set? x set)
+  (cond ((null? set) false)
+	((equal? x (car set)) true)
+	(else (element-of-set? x (cdr set)))))
+
+(define (encode msg tree)
+  (if (null? msg)
+      '()
+      (append (encode-symbol (car msg) tree)
+	      (encode (cdr msg) tree))))
+
+(define (encode-symbol symbol tree)
+  (cond ((leaf? tree) '())
+	((element-of-set? symbol (symbols (left-branch tree)))
+	 (cons 0 (encode-symbol symbol (left-branch tree))))
+	((element-of-set? symbol (symbols (right-branch tree)))
+	 (cons 1 (encode-symbol symbol (right-branch tree))))
+	(else (error "symbol not in tree - ENCODE-SYMBOL"))))
