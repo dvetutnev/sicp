@@ -1,0 +1,5 @@
+(define (make-acc val)
+  (define (add x)
+    (begin (set! val (+ val x))
+	   val))
+  add)
