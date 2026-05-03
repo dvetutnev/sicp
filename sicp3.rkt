@@ -13,20 +13,29 @@
 		  (f x))))))
 
 (define (make-account balance password)
-  (define (withdraw amount)
-    (if (>= balance amount)
-        (begin (set! balance (- balance amount))
-               balance)
-        "Insufficient funds"))
+  (let ((failed-attempts 0)) ; Счетчик неудачных попыток
+    (define (withdraw amount)
+      (if (>= balance amount)
+          (begin (set! balance (- balance amount))
+                 balance)
+          "Insufficient funds"))
 
-  (define (deposit amount)
-    (set! balance (+ balance amount))
-    balance)
+    (define (deposit amount)
+      (set! balance (+ balance amount))
+      balance)
 
-  (define (dispatch key m)
-    (cond ((not (eq? key password))
-           (error "Incorrect password -- MAKE-ACCOUNT"))
-          ((eq? m 'withdraw) withdraw)
-          ((eq? m 'deposit) deposit)
-          (else (error "Unknown request -- MAKE-ACCOUNT" m))))
-  dispatch)
+    (define (call-the-cops) "Police called!") ; Процедура вызова полиции
+
+    (define (dispatch p m)
+      (if (not (eq? p password))
+          (begin
+            (set! failed-attempts (+ failed-attempts 1))
+            (if (>= failed-attempts 7)
+                (lambda (x) (call-the-cops)) ; Если 7 попыток, вызываем полицию
+                (lambda (x) "Incorrect password")))
+          (begin
+            (set! failed-attempts 0) ; Сброс счетчика при правильном пароле
+            (cond ((eq? m 'withdraw) withdraw)
+                  ((eq? m 'deposit) deposit)
+                  (else (error "Unknown request -- MAKE-ACCOUNT" m))))))
+    dispatch))
