@@ -3,3 +3,11 @@
     (begin (set! val (+ val x))
 	   val))
   add)
+
+(define (make-monitored f)
+  (let ((n-calls 0))
+    (lambda (x)
+      (cond ((eq? x 'how-many-calls) n-calls)
+	    ((eq? x 'reset-count) (set! n-calls 0))
+	    (else (set! n-calls (+ n-calls 1))
+		  (f x))))))
