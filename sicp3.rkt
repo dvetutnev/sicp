@@ -11,3 +11,22 @@
 	    ((eq? x 'reset-count) (set! n-calls 0))
 	    (else (set! n-calls (+ n-calls 1))
 		  (f x))))))
+
+(define (make-account balance password)
+  (define (withdraw amount)
+    (if (>= balance amount)
+        (begin (set! balance (- balance amount))
+               balance)
+        "Insufficient funds"))
+
+  (define (deposit amount)
+    (set! balance (+ balance amount))
+    balance)
+
+  (define (dispatch key m)
+    (cond ((not (eq? key password))
+           (error "Incorrect password -- MAKE-ACCOUNT"))
+          ((eq? m 'withdraw) withdraw)
+          ((eq? m 'deposit) deposit)
+          (else (error "Unknown request -- MAKE-ACCOUNT" m))))
+  dispatch)
