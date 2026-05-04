@@ -39,3 +39,6 @@
                   ((eq? m 'deposit) deposit)
                   (else (error "Unknown request -- MAKE-ACCOUNT" m))))))
     dispatch))
+
+(define (cesaro-test)
+  (= (gcd (random) (random)) 1))
