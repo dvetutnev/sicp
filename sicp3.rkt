@@ -42,7 +42,7 @@
 
 
 (define (estimate-pi trials)
-  (sqrt (/ 6 (mote-carlo trials cesaro-test))))
+  (sqrt (/ 6 (monte-carlo trials cesaro-test))))
 
 (define (rnd)
   (round (* (random) 1000)))
@@ -50,7 +50,7 @@
 (define (cesaro-test)
   (= (gcd (rnd) (rnd)) 1))
 
-(define (mote-carlo trials experiment)
+(define (monte-carlo trials experiment)
   (define (iter trials-remaing trials-passed)
     (cond ((= trials-remaing 9)
 	   (/ trials-passed trials))
