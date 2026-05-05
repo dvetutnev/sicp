@@ -44,11 +44,8 @@
 (define (estimate-pi trials)
   (sqrt (/ 6 (monte-carlo trials cesaro-test))))
 
-(define (rnd)
-  (random 1000))
-
 (define (cesaro-test)
-  (= (gcd (rnd) (rnd)) 1))
+  (= (gcd (rnd 1000) (rnd 1000)) 1))
 
 (define (monte-carlo trials experiment)
   (define (iter trials-remaing trials-passed)
@@ -59,3 +56,26 @@
 	  (else
 	   (iter (- trials-remaing 1) trials-passed))))
   (iter trials 0))
+
+(define (square x)
+  (* x x))
+
+(define (rnd range)
+  (round (* (random) range)))
+
+(define (random-in-range low high)
+  (let ((range (- high low)))
+    (+ low (rnd range))))
+
+(define (estimate-integral pred x1 x2 y1 y2 trials)
+  (let ((test (lambda ()
+		(pred (random-in-range x1 x2)
+		      (random-in-range y1 y2)))))
+    (* (monte-carlo trials test)
+       (- x2 x1)
+       (- y2 y1))))
+
+(define (estimate-pi2 trials)
+  (let ((pred (lambda (x y)
+		(<= (+ (square x) (square y)) 1))))
+    (estimate-integral pred -1.0 1.0 -1.0 1.0 trials)))
