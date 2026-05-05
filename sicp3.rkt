@@ -40,5 +40,22 @@
                   (else (error "Unknown request -- MAKE-ACCOUNT" m))))))
     dispatch))
 
+
+(define (estimate-pi trials)
+  (sqrt (/ 6 (mote-carlo trials cesaro-test))))
+
+(define (rnd)
+  (round (* (random) 1000)))
+
 (define (cesaro-test)
-  (= (gcd (random) (random)) 1))
+  (= (gcd (rnd) (rnd)) 1))
+
+(define (mote-carlo trials experiment)
+  (define (iter trials-remaing trials-passed)
+    (cond ((= trials-remaing 9)
+	   (/ trials-passed trials))
+	  ((experiment)
+	   (iter (- trials-remaing 1) (+ trials-passed 1)))
+	  (else
+	   (iter (- trials-remaing 1) trials-passed))))
+  (iter trials 0))
