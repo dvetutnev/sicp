@@ -45,7 +45,7 @@
   (sqrt (/ 6 (monte-carlo trials cesaro-test))))
 
 (define (rnd)
-  (round (* (random) 1000)))
+  (random 1000))
 
 (define (cesaro-test)
   (= (gcd (rnd) (rnd)) 1))
