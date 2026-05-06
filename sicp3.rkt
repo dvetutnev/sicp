@@ -40,6 +40,13 @@
                   (else (error "Unknown request -- MAKE-ACCOUNT" m))))))
     dispatch))
 
+(define (make-joint pp-acc password new-password)
+  (lambda (p m)
+    (pp-acc (if (eq? p new-password)
+		password
+		false)
+	    m)))
+
 
 (define (estimate-pi trials)
   (sqrt (/ 6 (monte-carlo trials cesaro-test))))
