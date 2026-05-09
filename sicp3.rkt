@@ -86,3 +86,21 @@
   (let ((pred (lambda (x y)
 		(<= (+ (square x) (square y)) 1))))
     (estimate-integral pred -1.0 1.0 -1.0 1.0 trials)))
+
+
+(define (append! x y)
+  (set-cdr! (last-pair x) y)
+  x)
+
+(define (last-pair x)
+  (if (null? (mcdr x))
+      x
+      (last-pair (mcdr x))))
+
+(define (make-cicle x)
+  (set-cdr! (last-pair x) x)
+  x)
+
+(define (set-to-wow! x)
+  (set-car! (mcar x) 'wow)
+  x)
