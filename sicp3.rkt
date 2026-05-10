@@ -88,6 +88,9 @@
     (estimate-integral pred -1.0 1.0 -1.0 1.0 trials)))
 
 
+; (require rnrs/mutable-pairs-6)
+; (require compatibility/mlist)
+
 (define (append! x y)
   (set-cdr! (last-pair x) y)
   x)
