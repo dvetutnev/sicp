@@ -107,3 +107,14 @@
 (define (set-to-wow! x)
   (set-car! (mcar x) 'wow)
   x)
+
+; https://wizardbook.wordpress.com/2010/12/15/exercise-3-17/
+(define count-pairs
+  (let ((seen null))
+    (lambda (x)
+      (cond ((not (mpair? x)) 0)
+	    ((mmemq x seen) 0)
+	    (else (set! seen (mcons x seen))
+		  (+ (count-pairs (mcar x))
+		     (count-pairs (mcdr x))
+		     1))))))
