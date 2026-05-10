@@ -118,3 +118,13 @@
 		  (+ (count-pairs (mcar x))
 		     (count-pairs (mcdr x))
 		     1))))))
+
+; https://wizardbook.wordpress.com/2010/12/16/exercise-3-18/
+(define (has-cycle? xs)
+  (define seen null)
+  (define (cycle-aux ys)
+    (cond ((null? ys) false)
+	  ((mmemq (mcar ys) seen) true)
+	  (else (set! seen (mcons (mcar ys) seen))
+		(cycle-aux (mcdr ys)))))
+  (cycle-aux xs))
