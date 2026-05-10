@@ -120,6 +120,8 @@
 		     1))))))
 
 ; https://wizardbook.wordpress.com/2010/12/16/exercise-3-18/
+(define mcddr (compose mcdr mcdr))
+(define mcdddr (compose mcdr mcdr mcdr))
 (define (has-cycle? xs)
   (define seen null)
   (define (cycle-aux ys)
@@ -128,3 +130,16 @@
 	  (else (set! seen (mcons (mcar ys) seen))
 		(cycle-aux (mcdr ys)))))
   (cycle-aux xs))
+
+; https://wizardbook.wordpress.com/2010/12/16/exercise-3-19/
+(define (has-cycle2? xs)
+  (define (seen-last-pair? x)
+    (or (null? x) (null? (mcdr x))))
+  (define (chase turtle rabbit)
+    (cond ((or (null? turtle) (null? rabbit)) #f)
+          ((eq? (mcar turtle) (mcar rabbit)) #t)
+          ((seen-last-pair? (mcdr rabbit)) #f)
+          (else (chase (mcdr turtle) (mcddr rabbit)))))
+  (if (seen-last-pair? xs)
+      #f
+      (chase xs (mcdr xs))))
