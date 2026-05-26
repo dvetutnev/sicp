@@ -5,5 +5,10 @@
       empty-stream
       (stream-cons
        (apply proc (map stream-first argstreams))
-       (apply stream-map
+       (apply stream-mapc
               (cons proc (map stream-rest argstreams))))))
+
+(define (add-streams s1 s2)
+  (stream-mapc + s1 s2))
+
+(define integers (stream-cons 1 (add-streams ones integers)))
