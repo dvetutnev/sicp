@@ -12,3 +12,10 @@
   (stream-mapc + s1 s2))
 
 (define integers (stream-cons 1 (add-streams ones integers)))
+
+
+(define fibs
+  (stream-cons 0
+	       (stream-cons 1
+			    (add-streams (stream-rest fibs)
+					 fibs))))
