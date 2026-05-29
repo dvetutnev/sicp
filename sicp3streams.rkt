@@ -24,3 +24,26 @@
   (stream-map (lambda (x) (* x factor)) stream))
 
 (define double (stream-cons 1 (scale-stream double 2)))
+
+
+(define (divisible? x y)
+  (= (remainder x y) 0))
+
+(define (integers-starting-from n)
+  (stream-cons n (integers-starting-from (+ n 1))))
+
+(define integers2 (integers-starting-from 1))
+
+(define (prime? n)
+  (define (iter ps)
+    (cond ((> (square (stream-first ps)) n) true)
+	  ((divisible? n (stream-first ps)) false)
+	  (else (iter (stream-rest ps)))))
+  (iter primes))
+
+(define primes
+  (stream-cons
+   2
+   (stream-filter prime? (integers-starting-from 3))))
+
+
