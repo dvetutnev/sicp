@@ -19,3 +19,8 @@
 	       (stream-cons 1
 			    (add-streams (stream-rest fibs)
 					 fibs))))
+
+(define (scale-stream stream factor)
+  (stream-map (lambda (x) (* x factor)) stream))
+
+(define double (stream-cons 1 (scale-stream double 2)))
