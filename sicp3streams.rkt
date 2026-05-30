@@ -52,3 +52,12 @@
 
 (define factorials
   (stream-cons 1 (mul-streams factorials integers)))
+
+
+(define (partial-sum s)
+  (stream-cons (stream-first s)
+	       (add-streams (stream-rest s)
+			    (partial-sum s))))
+
+(define partial-sum-stream
+  (partial-sum integers))
