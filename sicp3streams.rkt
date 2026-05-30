@@ -47,3 +47,8 @@
    (stream-filter prime? (integers-starting-from 3))))
 
 
+(define (mul-streams s1 s2)
+  (stream-mapc * s1 s2))
+
+(define factorials
+  (stream-cons 1 (mul-streams factorials integers)))
