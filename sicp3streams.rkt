@@ -76,3 +76,11 @@
 			       (sqrt-improve guess x))
 			     guesses)))
   guesses)
+
+
+(define (pi-summands n)
+  (stream-cons (/ 1.0 n)
+	       (stream-map - (pi-summands (+ n 2)))))
+
+(define pi-stream
+  (scale-stream (partial-sum (pi-summands 1)) 4))
