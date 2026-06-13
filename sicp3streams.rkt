@@ -95,3 +95,12 @@
     (stream-cons (- s2 (/ (square (- s2 s1))
 			  (+ s0 (* -2 s1) s2)))
 		 (euler-transform (stream-rest s)))))
+
+(define (make-tableau transform s)
+  (stream-cons s
+	       (make-tableau transform
+			     (transform s))))
+
+(define (accelerated-sequence transform s)
+  (stream-map stream-first
+	      (make-tableau transform s)))
