@@ -104,3 +104,16 @@
 (define (accelerated-sequence transform s)
   (stream-map stream-first
 	      (make-tableau transform s)))
+
+
+(define (stream-limit s tolerance)
+  (cond ((stream-empty? s) null)
+	((stream-empty? (stream-rest s)) (stream-first))
+	(else (let ((1st (stream-first s))
+		    (2nd (stream-first (stream-rest s))))
+		(if (> tolerance (abs (- 1st 2nd)))
+		    2nd
+		    (stream-limit (stream-rest s) tolerance))))))
+
+(define (sqrt x tolerance)
+  (stream-limit (sqrt-stream x) tolerance))
