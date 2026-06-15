@@ -117,3 +117,11 @@
 
 (define (sqrt x tolerance)
   (stream-limit (sqrt-stream x) tolerance))
+
+
+(define (ln-summands n)
+  (stream-cons (/ 1.0 n)
+	       (stream-map - (ln-summands (+ n 1)))))
+
+(define ln-stream
+  (partial-sum (ln-summands 1)))
