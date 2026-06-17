@@ -140,3 +140,8 @@
     (stream-map (lambda (x) (list (stream-first s) x))
 		(stream-rest t))
     (pairs (stream-rest s) (stream-rest t)))))
+
+(define sum-of-primes
+  (stream-filter (lambda (x)
+		   (prime? (+ (car x) (cadr x))))
+		 (pairs integers2 integers2)))
