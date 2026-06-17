@@ -125,3 +125,18 @@
 
 (define ln-stream
   (partial-sum (ln-summands 1)))
+
+
+(define (interleave s1 s2)
+  (if (stream-empty? s1)
+      s1
+      (stream-cons (stream-first s1)
+		   (interleave s2 (stream-rest s1)))))
+
+(define (pairs s t)
+  (stream-cons
+   (list (stream-first s) (stream-first t))
+   (interleave
+    (stream-map (lambda (x) (list (stream-first s) x))
+		(stream-rest t))
+    (pairs (stream-rest s) (stream-rest t)))))
