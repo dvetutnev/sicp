@@ -145,3 +145,19 @@
   (stream-filter (lambda (x)
 		   (prime? (+ (car x) (cadr x))))
 		 (pairs integers2 integers2)))
+
+
+(define (triples s t u)
+  (stream-cons
+   (list (stream-first s) (stream-first t) (stream-first u))
+   (interleave
+    (stream-map (lambda (x) (append (list (stream-first s)) x))
+		(stream-rest (pairs t u)))
+    (triples
+     (stream-rest s) (stream-rest t) (stream-rest u)))))
+
+(define pythagorean-triples
+  (stream-filter (lambda (x) (= (+ (square (car x))
+				   (square (cadr x)))
+				(square (caddr x))))
+		 (triples integers2 integers2 integers2)))
