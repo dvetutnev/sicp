@@ -161,3 +161,12 @@
 				   (square (cadr x)))
 				(square (caddr x))))
 		 (triples integers2 integers2 integers2)))
+
+
+(define (show-stream s n)
+  (if (> n 0)
+      (begin
+	(display (stream-first s))
+	(newline)
+	(show-stream (stream-rest s) (- n 1)))
+      'done))
