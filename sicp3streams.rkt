@@ -197,3 +197,4 @@
     (weighted-pairs (stream-rest s) (stream-rest t) weight)
     weight)))
 
+;(weighted-pairs integers integers (lambda (x) (apply + x)))
