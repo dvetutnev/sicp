@@ -213,3 +213,11 @@
 
 (define unfactored
   (stream-filter unfactored? integers))
+
+
+(define (integral integrated initial-val dt)
+  (define int
+    (stream-cons initial-val
+		 (add-streams (scale-stream integrated dt)
+			      int)))
+  int)
