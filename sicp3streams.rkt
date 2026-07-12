@@ -170,3 +170,30 @@
 	(newline)
 	(show-stream (stream-rest s) (- n 1)))
       'done))
+
+
+(define (merge-weighted s1 s2 weight)
+  (cond ((stream-empty? s1) s2)
+	((stream-empty? s2) s1)
+	(else
+	 (let ((s1car (stream-first s1))
+	       (s2car (stream-first s2)))
+	   (if (<= (weight s1car) (weight s2car))
+	       (stream-cons s1car
+			    (merge-weighted (stream-rest s1)
+					    s2
+					    weight))
+	       (stream-cons s2car
+			    (merge-weighted s1
+					    (stream-rest s2)
+					    weight)))))))
+
+(define (weighted-pairs s t weight)
+  (stream-cons
+   (list (stream-first s) (stream-first t))
+   (merge-weighted
+    (stream-map (lambda (x) (list (stream-first s) x))
+		(stream-rest t))
+    (weighted-pairs (stream-rest s) (stream-rest t) weight)
+    weight)))
+
