@@ -230,4 +230,4 @@
 			   dt))))
 
 (define RC1 (RC 5 1 0.5))
-
+;(show-stream (RC1 integers 0.2) 5)
