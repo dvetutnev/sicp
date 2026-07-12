@@ -198,3 +198,18 @@
     weight)))
 
 ;(weighted-pairs integers integers (lambda (x) (apply + x)))
+
+(define (factored-weight x)
+  (let ((i (car x))
+        (j (cadr x)))
+    (+ (* 2 i)
+       (* 3 j)
+       (* 5 i j))))
+
+(define (unfactored? x)
+  (not (or (even? x)
+           (zero? (remainder x 3))
+           (zero? (remainder x 5)))))
+
+(define unfactored
+  (stream-filter unfactored? integers))
