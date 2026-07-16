@@ -164,7 +164,7 @@
 
 
 (define (show-stream s n)
-  (if (> n 0)
+  (if (and (> n 0) (not (stream-empty? s)))
       (begin
 	(display (stream-first s))
 	(newline)
@@ -231,3 +231,14 @@
 
 (define RC1 (RC 5 1 0.5))
 ;(show-stream (RC1 integers 0.2) 5)
+
+
+(define (list->stream xs)
+  (foldr (lambda (x ys)
+	   (stream-cons x ys))
+	 empty-stream
+	 xs))
+
+(define sence-data
+  (list->stream
+   (list 1 2 1.5 1 0.5 -0.1 -2 -3 -2 -0.5 0.2 3 4 0 0 0 0 0 -1 0 0 0 0 1 0 0)))
