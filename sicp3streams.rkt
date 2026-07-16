@@ -254,3 +254,15 @@
   (stream-mapc sign-change-detector
 	       sence-data
 	       (stream-cons 0 sence-data)))
+
+(define (smooth stream)
+  (stream-mapc (lambda (x y)
+		 (/ (+ x y) 2))
+	       stream
+	       (stream-cons 0 stream)))
+
+(define (make-zero-crossings input-stream)
+  (let ((smoothed-values (smooth input-stream)))
+    (stream-mapc sign-change-detector
+		 smoothed-values
+		 (stream-cons 0 smoothed-values))))
