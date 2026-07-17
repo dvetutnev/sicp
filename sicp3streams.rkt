@@ -280,3 +280,13 @@
   (define y (integrald (stream-lazy dy) y0 dt))
   (define dy (stream-map f y))
   y)
+
+(define (integrald2 delayed-integrand initial-value dt)
+  (stream-cons initial-value
+	       (if (stream-empty? delayed-integrand)
+		   empty-stream
+		   (let ((integrand (stream-force delayed-integrand)))
+		     (integral (stream-lazy (stream-rest integrand))
+			       (+ (* dt (stream-first integrand))
+				  initial-value)
+			       dt)))))
