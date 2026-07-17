@@ -290,3 +290,8 @@
 			       (+ (* dt (stream-first integrand))
 				  initial-value)
 			       dt)))))
+
+(define (solve2 f y0 dt)
+  (define y (integral (stream-lazy dy) y0 dt))
+  (define dy (stream-map f y))
+  y)
