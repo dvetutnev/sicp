@@ -271,12 +271,12 @@
 (define (integrald delayed-integrand initial-value dt)
   (define int
     (stream-cons initial-value
-		 (let ((integrand (force delayed-integrand)))
+		 (let ((integrand (stream-force delayed-integrand)))
 		   (add-streams (scale-stream integrand dt)
 				int))))
   int)
 
 (define (solve f y0 dt)
-  (define y (integrald (delay dy) y0 dt))
+  (define y (integrald (stream-lazy dy) y0 dt))
   (define dy (stream-map f y))
   y)
