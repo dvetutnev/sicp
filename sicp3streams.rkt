@@ -266,3 +266,12 @@
     (stream-mapc sign-change-detector
 		 smoothed-values
 		 (stream-cons 0 smoothed-values))))
+
+
+(define (integrald delayed-integrand initial-value dt)
+  (define int
+    (stream-cons initial-value
+		 (let ((integrand (force delayed-integrand)))
+		   (add-streams (scale-stream integrand dt)
+				int))))
+  int)
