@@ -292,6 +292,6 @@
 			       dt)))))
 
 (define (solve2 f y0 dt)
-  (define y (integral (stream-lazy dy) y0 dt))
+  (define y (integrald2 (stream-lazy dy) y0 dt))
   (define dy (stream-map f y))
   y)
