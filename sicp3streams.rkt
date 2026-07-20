@@ -312,3 +312,17 @@
 (define cesaro-stream
   (map-successive-pairs (lambda (r1 r2) (= (gcd r1 r2) 1))
 			random-numbers))
+
+(define (monte-carlo experiment-stream passed failed)
+  (define (next passed failed)
+    (stream-cons
+     (/ passed (+ passed failed))
+     (monte-carlo
+      (stream-rest experiment-stream) passed failed)))
+  (if (stream-first experiment-stream)
+      (next (+ passed 1) failed)
+      (next passed (+ failed 1))))
+
+(define pi
+  (stream-map (lambda (x) (sqrt (/ 6 x) 0.0001))
+	      (monte-carlo cesaro-stream 1 0)))
