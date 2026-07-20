@@ -295,3 +295,11 @@
   (define y (integrald2 (stream-lazy dy) y0 dt))
   (define dy (stream-map f y))
   y)
+
+
+(define (random-update x)
+  (modulo (+ (* 48271 x) 0) 2147483647))
+
+(define random-numbers
+  (stream-cons 42
+	       (stream-map random-update random-numbers)))
