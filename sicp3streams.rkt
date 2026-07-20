@@ -303,3 +303,12 @@
 (define random-numbers
   (stream-cons 42
 	       (stream-map random-update random-numbers)))
+
+(define (map-successive-pairs f s)
+  (stream-cons
+   (f (stream-first s) (stream-first (stream-rest s)))
+   (map-successive-pairs f (stream-rest (stream-rest s)))))
+
+(define cesaro-stream
+  (map-successive-pairs (lambda (r1 r2) (= (gcd r1 r2) 1))
+			random-numbers))
